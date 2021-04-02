@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+
+
+{% block content %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Search Your favorite movie</h1>
+        <p class="lead text-muted">Get the top results for your query!</p>
+        <form class="my-2" method="POST">
+            <div class="input-group mb-3">
+                {% csrf_token %}
+                <input
+                    class="form-control mr-sm-2"
+                    name="search"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                >
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="search">Search</button>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Result -->
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for movie in movie_list %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img
+                        class="bd-placeholder-img card-img-top"
+                        width="fit-content"
+                        height="200"
+                        src="{{ movie.Poster }}"
+                        preserveAspectRatio="xMidYMid slice"
+                        focusable="false"
+                        role="img"
+                        aria-label="Placeholder: Thumbnail"
+                    ></img>
+                <div class="card-body">
+                    <p class="card-text">{{ movie.Title }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <!-- <p>{{movie.imdbID}}</p> -->
+                            <a type="button" href="{% url 'search:getYTtrailer' %}?title={{ movie.Title }}&imdb={{ movie.imdbID }}" class="btn btn-sm btn-outline-secondary">Movie Details</a>
+                        </div>
+                        <small class="text-muted">{{ movie.year }} year</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}

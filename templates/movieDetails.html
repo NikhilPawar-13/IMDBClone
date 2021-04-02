@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+<div class="mainDiv" style="text-align: center; width: 60%; margin-left: 20%; margin-right: 20%;">
+    <h1 style="margin-top: 10px;">Movie title :- {{ title }}</h1>
+    {% if movieDetails.description %}
+    <h3>Description:- </h3>
+    <p>{{ movieDetails.description }}</p>
+    <p>
+        <span style="float: right;"><strong>Movie Rating:-</strong> {{ movieDetails.imdb_rating }}</span>
+        <span style="float: left;"><strong>Release Date:-</strong> {{movieDetails.release_date}}</span>
+    </p>
+    {% endif %}
+    <br><br>
+    <iframe width="100%" height="400" src="{{ youtubeTrailer }}"></iframe>
+</div>
+{% endblock %}
